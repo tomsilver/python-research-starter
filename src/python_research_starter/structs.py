@@ -3,11 +3,10 @@
 from dataclasses import dataclass
 from typing import TypeAlias
 
-import numpy as np
 from numpy.typing import NDArray
 
 # Define some data structures for this example repository (to be changed).
-State: TypeAlias = NDArray[np.int8]
+State: TypeAlias = NDArray
 Action: TypeAlias = int
 Goal: TypeAlias = str
 

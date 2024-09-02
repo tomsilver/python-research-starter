@@ -40,12 +40,12 @@ class MazeBenchmark(Benchmark):
         # Generate an empty obstacle grid of random size.
         height = rng.integers(self._min_height, self._max_height + 1)
         width = rng.integers(self._min_width, self._max_width + 1)
-        grid = np.full((height, width), self._empty, dtype=np.uint8)
+        grid = np.full((height, width), self._empty, dtype=int)
 
         # Generate a random start position.
         start = (
-            rng.integers(0, height + 1, dtype=np.uint8),
-            rng.integers(0, width + 1, dtype=np.uint8),
+            rng.integers(0, height, dtype=int),
+            rng.integers(0, width, dtype=int),
         )
         grid[start] = self._agent
 
@@ -58,9 +58,8 @@ class MazeBenchmark(Benchmark):
             walk_grid = self.get_next_state(walk_grid, action)
             current = self._state_to_agent(walk_grid)
             visited.add(current)
-            if len(visited) > 1 and rng.uniform() > 0.9:
+            if start != current and rng.uniform() > 0.9:
                 target = current
-                import ipdb; ipdb.set_trace()
                 break
 
         # Add random obstacles. Choose a quarter of the safe cells.
@@ -101,7 +100,7 @@ class MazeBenchmark(Benchmark):
         assert goal.startswith("Go to (") and goal.endswith(")")
         r, c = map(int, goal[len("Go to (") : -1].replace(" ", "").split(","))
         return state[r, c] == self._agent
-    
+
     def _state_to_agent(self, state: State) -> tuple[int, int]:
         loc = np.argwhere(state == self._agent)[0]
-        return (np.uint8(loc[0]), np.uint8(loc[1]))
+        return (int(loc[0]), int(loc[1]))
