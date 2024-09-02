@@ -1,11 +1,27 @@
 """A 2D maze benchmark."""
 
+from __future__ import annotations
+
+from dataclasses import dataclass
 from typing import ClassVar
 
 import numpy as np
 
 from python_research_starter.benchmarks.base_benchmark import Benchmark
 from python_research_starter.structs import Action, Goal, State, Task
+
+
+@dataclass(frozen=True)
+class _MazeState:
+
+    agent: tuple[int, int]
+    obstacles: frozenset[tuple[int, int]]
+    height: int
+    width: int
+
+    def copywith(self, agent: tuple[int, int]) -> _MazeState:
+        """Return a copy of the state with the agent changed."""
+        return _MazeState(agent, self.obstacles, self.height, self.width)
 
 
 class MazeBenchmark(Benchmark):
@@ -41,25 +57,24 @@ class MazeBenchmark(Benchmark):
 
     def _generate_task(self, rng: np.random.Generator) -> Task:
         # Generate an empty obstacle grid of random size.
-        height = rng.integers(self._min_height, self._max_height + 1)
-        width = rng.integers(self._min_width, self._max_width + 1)
-        grid = np.full((height, width), self._empty, dtype=int)
+        height = rng.integers(self._min_height, self._max_height + 1, dtype=int)
+        width = rng.integers(self._min_width, self._max_width + 1, dtype=int)
 
         # Generate a random start position.
         start = (
             rng.integers(0, height, dtype=int),
             rng.integers(0, width, dtype=int),
         )
-        grid[start] = self._agent
 
         # Do a random walk to get an end position.
         visited = {start}
-        walk_grid = grid.copy()
-        possible_actions = [self._up, self._down, self._left, self._right]
+        walk_state = _MazeState(start, frozenset(), height, width)
         while True:
-            action = rng.choice(possible_actions)
-            walk_grid = self.get_next_state(walk_grid, action)
-            current = self._state_to_agent(walk_grid)
+            action = rng.choice(self.get_actions())
+            next_state = self.get_next_state(walk_state, action)
+            assert isinstance(next_state, _MazeState)
+            walk_state = next_state
+            current = walk_state.agent
             visited.add(current)
             if start != current and rng.uniform() > 0.9:
                 target = current
@@ -69,17 +84,22 @@ class MazeBenchmark(Benchmark):
         all_positions = {(r, c) for r in range(height) for c in range(width)}
         obstacle_candidates = sorted(all_positions - visited)
         num_obstacles = int(len(obstacle_candidates) * 0.25)
-        obstacles = rng.choice(obstacle_candidates, size=num_obstacles, replace=False)
-        for r, c in obstacles:
-            grid[r, c] = self._obstacle
+        obstacles = frozenset(
+            (r, c)
+            for r, c in rng.choice(
+                obstacle_candidates, size=num_obstacles, replace=False
+            )
+        )
+        state = _MazeState(start, obstacles, height, width)
 
         # Finish the task.
-        task = Task(grid, f"Go to {target}")
+        task = Task(state, f"Go to {target}")
 
         return task
 
     def get_next_state(self, state: State, action: Action) -> State:
-        r, c = self._state_to_agent(state)
+        assert isinstance(state, _MazeState)
+        r, c = state.agent
         dr, dc = {
             self._up: (-1, 0),
             self._down: (1, 0),
@@ -87,23 +107,17 @@ class MazeBenchmark(Benchmark):
             self._right: (0, 1),
         }[action]
         nr, nc = r + dr, c + dc
-        if (not (0 <= nr < state.shape[0] and 0 <= nc < state.shape[1])) or (
-            state[nr, nc] == self._obstacle
+        if (not (0 <= nr < state.height and 0 <= nc < state.width)) or (
+            (nr, nc) in state.obstacles
         ):
             nr, nc = r, c
-        next_state = state.copy()
-        next_state[r, c] = self._empty
-        next_state[nr, nc] = self._agent
-        return next_state
+        return state.copywith(agent=(nr, nc))
 
     def get_cost(self, state: State, action: Action, next_state: State) -> float:
         return 1.0
 
     def check_goal(self, state: State, goal: Goal) -> bool:
+        assert isinstance(state, _MazeState)
         assert goal.startswith("Go to (") and goal.endswith(")")
         r, c = map(int, goal[len("Go to (") : -1].replace(" ", "").split(","))
-        return state[r, c] == self._agent
-
-    def _state_to_agent(self, state: State) -> tuple[int, int]:
-        loc = np.argwhere(state == self._agent)[0]
-        return (int(loc[0]), int(loc[1]))
+        return state.agent == (r, c)

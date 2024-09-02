@@ -1,12 +1,10 @@
 """Data structures."""
 
 from dataclasses import dataclass
-from typing import TypeAlias
-
-from numpy.typing import NDArray
+from typing import Hashable, TypeAlias
 
 # Define some data structures for this example repository (to be changed).
-State: TypeAlias = NDArray
+State: TypeAlias = Hashable
 Action: TypeAlias = int
 Goal: TypeAlias = str
 
