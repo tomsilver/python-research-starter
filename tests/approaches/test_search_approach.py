@@ -16,7 +16,6 @@ def test_search_approach():
         benchmark.get_cost,
         benchmark.check_goal,
     )
-    assert approach.get_name() == "search"
     rng = np.random.default_rng(123)
     task = benchmark.generate_tasks(1, "train", rng)[0]
     plan = approach.generate_plan(task, "test", 1.0, rng)

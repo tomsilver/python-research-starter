@@ -41,10 +41,6 @@ class MazeBenchmark(Benchmark):
     _left: ClassVar[int] = 2
     _right: ClassVar[int] = 3
 
-    @classmethod
-    def get_name(cls) -> str:
-        return "maze"
-
     def get_actions(self) -> list[Action]:
         return [self._up, self._down, self._left, self._right]
 

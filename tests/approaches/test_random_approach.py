@@ -15,7 +15,6 @@ def test_random_approach():
         benchmark.get_cost,
         benchmark.check_goal,
     )
-    assert approach.get_name() == "random"
     rng = np.random.default_rng(123)
     task = benchmark.generate_tasks(1, "train", rng)[0]
     plan = approach.generate_plan(task, "test", 1e-1, rng)

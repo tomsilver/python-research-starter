@@ -29,11 +29,6 @@ class Approach(abc.ABC):
         self._cost_fn = cost_fn
         self._goal_fn = goal_fn
 
-    @classmethod
-    @abc.abstractmethod
-    def get_name(cls) -> str:
-        """The name of the approach."""
-
     @abc.abstractmethod
     def train(self, training_tasks: list[Task]) -> None:
         """Learn something on training tasks."""

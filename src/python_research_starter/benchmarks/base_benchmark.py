@@ -15,11 +15,6 @@ class Benchmark(abc.ABC):
     test split in the distribution.
     """
 
-    @classmethod
-    @abc.abstractmethod
-    def get_name(cls) -> str:
-        """The name of the benchmark."""
-
     @abc.abstractmethod
     def get_actions(self) -> list[Action]:
         """Define the valid actions for the task."""

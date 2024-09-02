@@ -11,10 +11,6 @@ from python_research_starter.structs import Action, Task
 class RandomApproach(Approach):
     """An approach that attempts to make a plan by taking random actions."""
 
-    @classmethod
-    def get_name(cls) -> str:
-        return "random"
-
     def train(self, training_tasks: list[Task]) -> None:
         pass
 

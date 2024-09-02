@@ -12,10 +12,6 @@ from python_research_starter.structs import Action, State, Task
 class SearchApproach(Approach):
     """An approach that uses uniform-cost search to find a plan."""
 
-    @classmethod
-    def get_name(cls) -> str:
-        return "search"
-
     def train(self, training_tasks: list[Task]) -> None:
         pass
 
