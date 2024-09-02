@@ -21,6 +21,10 @@ class Benchmark(abc.ABC):
         """The name of the benchmark."""
 
     @abc.abstractmethod
+    def get_actions(self) -> list[Action]:
+        """Define the valid actions for the task."""
+
+    @abc.abstractmethod
     def generate_tasks(
         self, num_tasks: int, train_or_test: str, rng: np.random.Generator
     ) -> list[Task]:

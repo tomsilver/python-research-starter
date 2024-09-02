@@ -29,6 +29,9 @@ class MazeBenchmark(Benchmark):
     def get_name(cls) -> str:
         return "maze"
 
+    def get_actions(self) -> list[Action]:
+        return [self._up, self._down, self._left, self._right]
+
     def generate_tasks(
         self, num_tasks: int, train_or_test: str, rng: np.random.Generator
     ) -> list[Task]:

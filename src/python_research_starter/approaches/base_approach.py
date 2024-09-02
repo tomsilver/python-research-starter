@@ -18,11 +18,13 @@ class Approach(abc.ABC):
 
     def __init__(
         self,
+        actions: list[Action],
         transition_fn: Callable[[State, Action], State],
         cost_fn: Callable[[State, Action, State], float],
         goal_fn: Callable[[State, Goal], bool],
     ) -> None:
 
+        self._actions = actions
         self._transition_fn = transition_fn
         self._cost_fn = cost_fn
         self._goal_fn = goal_fn
@@ -33,7 +35,11 @@ class Approach(abc.ABC):
         """The name of the approach."""
 
     @abc.abstractmethod
+    def train(self, training_tasks: list[Task]) -> None:
+        """Learn something on training tasks."""
+
+    @abc.abstractmethod
     def generate_plan(
-        self, task: Task, train_or_test: str, rng: np.random.Generator
+        self, task: Task, train_or_test: str, timeout: float, rng: np.random.Generator
     ) -> list[Action]:
         """Generate a plan to solve the given task."""
