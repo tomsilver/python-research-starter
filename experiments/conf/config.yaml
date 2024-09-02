@@ -1,0 +1,8 @@
+seed: 0
+num_train_tasks: 10
+num_test_tasks: 50
+planning_timeout: 0.05
+defaults:
+  - _self_
+  - approach: random
+  - benchmark: maze

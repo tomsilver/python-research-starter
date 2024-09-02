@@ -27,11 +27,6 @@ class _MazeState:
 class MazeBenchmark(Benchmark):
     """A 2D maze benchmark."""
 
-    _min_height: ClassVar[int] = 5
-    _max_height: ClassVar[int] = 8
-    _min_width: ClassVar[int] = 5
-    _max_width: ClassVar[int] = 8
-
     _empty: ClassVar[int] = 0
     _obstacle: ClassVar[int] = 1
     _agent: ClassVar[int] = 2
@@ -40,6 +35,21 @@ class MazeBenchmark(Benchmark):
     _down: ClassVar[int] = 1
     _left: ClassVar[int] = 2
     _right: ClassVar[int] = 3
+
+    def __init__(
+        self,
+        min_height: int,
+        max_height: int,
+        min_width: int,
+        max_width: int,
+        *args,
+        **kwargs,
+    ) -> None:
+        super().__init__(*args, **kwargs)
+        self._min_height = min_height
+        self._max_height = max_height
+        self._min_width = min_width
+        self._max_width = max_width
 
     def get_actions(self) -> list[Action]:
         return [self._up, self._down, self._left, self._right]
@@ -72,7 +82,7 @@ class MazeBenchmark(Benchmark):
             walk_state = next_state
             current = walk_state.agent
             visited.add(current)
-            if start != current and rng.uniform() > 0.9:
+            if start != current and rng.uniform() > 0.99:
                 target = current
                 break
 

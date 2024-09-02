@@ -7,7 +7,7 @@ from python_research_starter.benchmarks.maze_benchmark import MazeBenchmark
 
 def test_maze_benchmark():
     """Tests for MazeBenchmark()."""
-    env = MazeBenchmark()
+    env = MazeBenchmark(5, 8, 5, 8)
     rng = np.random.default_rng(123)
     tasks = env.generate_tasks(3, "train", rng)
     assert len(tasks) == 3

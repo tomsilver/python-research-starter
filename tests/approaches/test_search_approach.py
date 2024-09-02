@@ -9,7 +9,7 @@ from python_research_starter.utils import plan_is_valid
 
 def test_search_approach():
     """Tests for SearchApproach()."""
-    benchmark = MazeBenchmark()
+    benchmark = MazeBenchmark(5, 8, 5, 8)
     approach = SearchApproach(
         benchmark.get_actions(),
         benchmark.get_next_state,

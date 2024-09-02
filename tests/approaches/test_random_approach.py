@@ -8,7 +8,7 @@ from python_research_starter.benchmarks.maze_benchmark import MazeBenchmark
 
 def test_random_approach():
     """Tests for RandomApproach()."""
-    benchmark = MazeBenchmark()
+    benchmark = MazeBenchmark(5, 8, 5, 8)
     approach = RandomApproach(
         benchmark.get_actions(),
         benchmark.get_next_state,

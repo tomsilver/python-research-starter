@@ -1,0 +1,5 @@
+_target_: "python_research_starter.benchmarks.maze_benchmark.MazeBenchmark"
+min_height: 40
+max_height: 60
+min_width: 40
+max_width: 60

@@ -1,15 +1,17 @@
 """Script for running experiments with hydra."""
 
 import logging
+import time
 
 import hydra
 import numpy as np
+import pandas as pd
 from omegaconf import DictConfig
 
 from python_research_starter.approaches.base_approach import Approach
 from python_research_starter.benchmarks.base_benchmark import Benchmark
 from python_research_starter.structs import Task
-from python_research_starter.utils import plan_is_valid
+from python_research_starter.utils import get_plan_cost, plan_is_valid
 
 
 @hydra.main(version_base=None, config_name="config", config_path="conf/")
@@ -37,18 +39,18 @@ def _main(cfg: DictConfig) -> None:
     approach.train(training_tasks=train_tasks)
 
     # Evaluate.
-    test_tasks = benchmark.generate_tasks(cfg.num_eval_tasks, "test", rng)
+    test_tasks = benchmark.generate_tasks(cfg.num_test_tasks, "test", rng)
     test_task_metrics: list[dict[str, float]] = []
-    for task in test_tasks:
+    for i, task in enumerate(test_tasks):
         metrics = _run_single_task_evaluation(
             task, approach, benchmark, rng, timeout=cfg.planning_timeout
         )
+        metrics["task_id"] = i
         test_task_metrics.append(metrics)
 
     # Aggregate and save results.
-    import ipdb
-
-    ipdb.set_trace()
+    df = pd.DataFrame(test_task_metrics)
+    print(df)
 
 
 def _run_single_task_evaluation(
@@ -58,10 +60,13 @@ def _run_single_task_evaluation(
     rng: np.random.Generator,
     timeout: float,
 ) -> dict[str, float]:
+    start_time = time.perf_counter()
     plan = approach.generate_plan(task, "test", timeout, rng)
-    # TODO add more metrics
+    duration = time.perf_counter() - start_time
     metrics: dict[str, float] = {}
     metrics["success"] = plan_is_valid(plan, task, benchmark)
+    metrics["cost"] = get_plan_cost(plan, task, benchmark)
+    metrics["duration"] = duration
     return metrics
 
 
