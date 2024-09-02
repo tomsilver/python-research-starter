@@ -14,6 +14,7 @@ dependencies = [
    "pandas",
    "pandas-stubs",
    "hydra-core",
+   "omegaconf",
    "tomsutils@git+https://github.com/tomsilver/toms-utils.git",
 ]
 
