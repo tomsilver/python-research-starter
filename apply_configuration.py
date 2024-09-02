@@ -81,7 +81,10 @@ def _main() -> None:
         git_config_file = git_repo / "config"
         with open(git_config_file, "r", encoding="utf-8") as fp:
             git_config_contents = fp.read()
-        if "git@github.com:tomsilver/python-starter.git" in git_config_contents:
+        if (
+            "git@github.com:tomsilver/python-research-starter.git"
+            in git_config_contents
+        ):
             shutil.rmtree(git_repo)
 
     # Initialize the repo anew.
@@ -117,8 +120,8 @@ def _main() -> None:
     substitutions = {
         "Tom Silver": developer,
         "tomsilver": github_username,
-        "python-starter": repo_name,
-        "python_starter": package_name,
+        "python-research-starter": repo_name,
+        "python_research_starter": package_name,
         "3.10": f"3.{python_subversion}",
         "310": f"3{python_subversion}",
     }
@@ -128,7 +131,7 @@ def _main() -> None:
 
     # Rename the package repo.
     subprocess.run(
-        ["mv", "src/python_starter", f"src/{package_name}"],
+        ["mv", "src/python_research_starter", f"src/{package_name}"],
         check=True,
         capture_output=True,
     )

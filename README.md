@@ -1,6 +1,6 @@
-# Python Starter Repo
+# Python Research Starter Repo
 
-![workflow](https://github.com/tomsilver/python-starter/actions/workflows/ci.yml/badge.svg)
+![workflow](https://github.com/tomsilver/python-research-starter/actions/workflows/ci.yml/badge.svg)
 
 A basic template for building Python packages.
 
@@ -19,7 +19,7 @@ A package built from this starter code will have the following features:
 1. Go to https://github.com/new and follow the instructions on the first page. No need to include a .gitignore, README, or LICENSE; these will be added later. After clicking "Create repository", stop -- don't follow the command line instructions. Remember the NAME of the repository and then go on to step 2.
 
 ### Set Up the Code
-2. **Clone this repository** and give it the name of your repo: `git clone git@github.com:tomsilver/python-starter.git <NAME>`. You now have a directory called NAME. **Enter** it: `cd <NAME>`.
+2. **Clone this repository** and give it the name of your repo: `git clone git@github.com:tomsilver/python-research-starter.git <NAME>`. You now have a directory called NAME. **Enter** it: `cd <NAME>`.
 3. **Configure the repository:** Make changes to `config.json` and then save.
 4. **Apply the configuration**: Make sure that your changes to `config.json` are finalized because they can only be applied once. When you are ready, run `python apply_configuration.py`.
 5. **Push your changes**: For example, run `git add . && git commit -m "First commit" && git push -u origin main`.
