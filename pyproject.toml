@@ -3,7 +3,7 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "python_starter"
+name = "python_research_starter"
 version = "0.1.0"
 description = "A basic starter for Python packages."
 readme = "README.md"
@@ -11,6 +11,9 @@ requires-python = ">=3.10"
 dependencies = [
    "matplotlib",
    "numpy",
+   "pandas",
+   "pandas-stubs",
+   "hydra-core",
 ]
 
 [project.optional-dependencies]
@@ -28,7 +31,7 @@ develop = [
 where = ["src"]
 
 [tool.setuptools.package-data]
-python_starter = ["py.typed"]
+python_research_starter = ["py.typed"]
 
 [tool.black]
 line-length = 88
