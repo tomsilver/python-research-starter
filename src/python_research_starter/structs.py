@@ -7,7 +7,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 # Define some data structures for this example repository (to be changed).
-State: TypeAlias = NDArray[np.float32]
+State: TypeAlias = NDArray[np.int8]
 Action: TypeAlias = int
 Goal: TypeAlias = str
 
