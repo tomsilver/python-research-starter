@@ -5,4 +5,4 @@ planning_timeout: 0.05
 defaults:
   - _self_
   - approach: random
-  - benchmark: maze
+  - benchmark: maze_small
