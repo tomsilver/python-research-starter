@@ -1,8 +1,7 @@
-import hydra
-import omegaconf
+from dataclasses import dataclass
 
-from limb_repo.environments.base_environment import *
-from limb_repo.structs import *
+from limb_repo.environments.base_environment import BaseEnvironment, Config
+from limb_repo.structs import Pose, State
 
 @dataclass
 class PyBulletConfig(Config):
@@ -24,7 +23,6 @@ class PyBulletEnvironment(BaseEnvironment):
         #super().__init__()
         pass
 
-    def parse_config(self, config_file: str) -> Config:
+    def parse_config(self) -> Config:
         """Parse the configuration file."""
-        config_file = ''
         return Config()

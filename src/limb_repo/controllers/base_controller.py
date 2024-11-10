@@ -3,7 +3,6 @@ from dataclasses import dataclass
 
 from limb_repo.structs import State
 
-
 @dataclass
 class Config:
     """The configuration of the environment."""

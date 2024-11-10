@@ -1,7 +1,6 @@
 """Data structures."""
 
-from dataclasses import dataclass
-from typing import Hashable, TypeAlias
+from typing import TypeAlias
 
 import numpy as np
 

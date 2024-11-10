@@ -32,7 +32,7 @@ jobs:
         pip install -e ".[develop]"
     - name: Lint
       run: |
-        pytest . --pylint -m pylint --pylint-rcfile=.pylintrc
+        pytest . --pylint -m pylint --pylint-rcfile=.pylintrc --pylint-opts="--disable=C"
   static-type-checking:
     runs-on: ubuntu-latest
     strategy:

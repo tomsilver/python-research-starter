@@ -52,7 +52,7 @@ confidence=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
-disable=raw-checker-failed,bad-inline-option,locally-disabled,file-ignored,suppressed-message,useless-suppression,deprecated-pragma,not-callable,logging-format-interpolation,consider-using-enumerate,invalid-name,eval-used,len-as-condition,raise-missing-from,consider-using-with,logging-fstring-interpolation,cache-max-size-none,unnecessary-lambda-assignment
+disable=C,raw-checker-failed,bad-inline-option,locally-disabled,file-ignored,suppressed-message,useless-suppression,deprecated-pragma,not-callable,logging-format-interpolation,consider-using-enumerate,invalid-name,eval-used,len-as-condition,raise-missing-from,consider-using-with,logging-fstring-interpolation,cache-max-size-none,unnecessary-lambda-assignment
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option

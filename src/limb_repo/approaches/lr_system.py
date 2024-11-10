@@ -3,7 +3,7 @@
 import abc
 
 from limb_repo.environments.base_environment import BaseEnvironment
-from limb_repo.structs import *
+from limb_repo.structs import Controller, State
 
 
 class LimbRepositioningSystem:
