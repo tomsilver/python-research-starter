@@ -21,7 +21,7 @@ class Benchmark(abc.ABC):
 
     @abc.abstractmethod
     def generate_tasks(
-        self, num_tasks: int, train_or_test: str, rng: np.randm.Generator
+        self, num_tasks: int, train_or_test: str, rng: np.random.Generator
     ) -> list[Task]:
         """Randomly generate a number of tasks."""
 
