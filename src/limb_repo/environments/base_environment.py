@@ -6,15 +6,16 @@ from limb_repo.structs import *
 @dataclass
 class Config:
     """The configuration of the environment."""
-    pass
+
 
 @dataclass
 class EnvState:
     """The state of the environment."""
-    pass
+
 
 class BaseEnvironment(abc.ABC):
     """An environment for the agent to interact with."""
+
     def __init__(self) -> None:
         pass
 

@@ -9,9 +9,18 @@ import numpy as np
 State: TypeAlias = np.ndarray
 Action: TypeAlias = np.ndarray
 Goal: TypeAlias = State
+Pose :TypeAlias = np.ndarray
+
+class Task:
+    """An initial state and goal."""
+
+    init: State
+    goal: Goal
+
 
 class Controller:
     """A controller for the agent to interact with the environment."""
+
 
 # Limb Repo Structs
 LRState: TypeAlias = State
