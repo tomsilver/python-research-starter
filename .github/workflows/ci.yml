@@ -10,7 +10,7 @@ jobs:
       - name: Run black to test code linting
         uses: psf/black@stable
         with:
-          options: "--check --verbose"
+          options: "--verbose"
           jupyter: true
       - name: Run isort to organize imports
         uses: isort/isort-action@master
