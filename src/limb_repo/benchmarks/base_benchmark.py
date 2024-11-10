@@ -4,7 +4,7 @@ import abc
 
 import numpy as np
 
-from python_research_starter.structs import Action, Goal, State, Task
+from limb_repo.structs import Action, Goal, State, Task
 
 
 class Benchmark(abc.ABC):

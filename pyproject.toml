@@ -3,9 +3,9 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "python_research_starter"
+name = "limb_repo"
 version = "0.1.0"
-description = "An example of how to structure research code."
+description = "Limb Repositioning Research Project."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -33,7 +33,7 @@ develop = [
 where = ["src"]
 
 [tool.setuptools.package-data]
-python_research_starter = ["py.typed"]
+limb_repo = ["py.typed"]
 
 [tool.black]
 line-length = 88

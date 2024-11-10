@@ -7,8 +7,8 @@ from typing import ClassVar
 
 import numpy as np
 
-from python_research_starter.benchmarks.base_benchmark import Benchmark
-from python_research_starter.structs import Action, Goal, State, Task
+from limb_repo.benchmarks.base_benchmark import Benchmark
+from limb_repo.structs import Action, Goal, State, Task
 
 
 @dataclass(frozen=True)
