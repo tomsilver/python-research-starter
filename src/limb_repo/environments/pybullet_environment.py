@@ -24,7 +24,7 @@ class PyBulletEnvironment(BaseEnvironment):
         #super().__init__()
         pass
 
-    def parse_config(self, config_file: str) -> PyBulletConfig:
+    def parse_config(self, config_file: str) -> Config:
         """Parse the configuration file."""
         config_file = ''
-        return PyBulletConfig()
+        return Config()
