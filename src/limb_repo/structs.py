@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 from typing import Hashable, TypeAlias
+
 import numpy as np
 
 # Define some data structures for this example repository (to be changed).

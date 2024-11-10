@@ -1,5 +1,7 @@
 import abc
+
 from limb_repo.structs import *
+
 
 @dataclass
 class Config:

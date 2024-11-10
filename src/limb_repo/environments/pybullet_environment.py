@@ -4,6 +4,7 @@ import omegaconf
 from limb_repo.environments.base_environment import *
 from limb_repo.structs import *
 
+
 class PyBulletEnvironment(BaseEnvironment):
     """Pybullet environment for Limb Repositioning."""
     class PyBulletConfig(Config):

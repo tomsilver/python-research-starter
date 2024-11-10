@@ -1,8 +1,10 @@
 """A base class defining the API for a Limb Repositioning System."""
 
 import abc
-from limb_repo.structs import *
+
 from limb_repo.environments.base_environment import BaseEnvironment
+from limb_repo.structs import *
+
 
 class LimbRepositioningSystem():
     """A base class defining the API for a Limb Repositioning System."""
