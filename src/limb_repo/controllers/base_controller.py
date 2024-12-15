@@ -1,7 +1,9 @@
+"""Abstract Base Controller."""
 import abc
 from dataclasses import dataclass
 
 from limb_repo.structs import State
+
 
 @dataclass
 class Config:

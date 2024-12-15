@@ -1,10 +1,15 @@
+# pylint: disable=attribute-defined-outside-init, no-member
 """Testing numpy subclassing."""
 
-import numpy as np
 from typing import TypeAlias
 
+import numpy as np
+
+
+# from numpy docs
 class RealisticInfoArray(np.ndarray):
-    def __new__(cls, input_array, info=None):
+    """From Numpy Docs with array_finalize removed"""
+    def __new__(cls, input_array, info=None) -> "RealisticInfoArray":
         # Input array is an already formed ndarray instance
         # We first cast to be our class type
         obj = np.asarray(input_array).view(cls)
@@ -15,7 +20,8 @@ class RealisticInfoArray(np.ndarray):
 
 
 class RealisticInfoArrayWithArrayFinalize(np.ndarray):
-    def __new__(cls, input_array, info=None):
+    """From Numpy Docs"""
+    def __new__(cls, input_array, info=None) -> "RealisticInfoArrayWithArrayFinalize":
         # Input array is an already formed ndarray instance
         # We first cast to be our class type
         obj = np.asarray(input_array).view(cls)
@@ -33,6 +39,7 @@ class RealisticInfoArrayWithArrayFinalize(np.ndarray):
 
 State: TypeAlias = np.ndarray
 
+
 class LR_State(State):
     """Limb Repositioning State.
 
@@ -42,7 +49,7 @@ class LR_State(State):
 
     def __new__(
         cls, input_array: np.ndarray, active_n_dofs: int = 6, passive_n_dofs: int = 6
-    ):
+    ) -> "LR_State":
         assert len(input_array) == 3 * (active_n_dofs + passive_n_dofs)
 
         obj = np.asarray(input_array).view(cls)
@@ -59,34 +66,41 @@ class LR_State(State):
 
     @property
     def active_kinematics(self):
+        """Get active kinematics."""
         return self[: 3 * self.active_n_dofs]
 
     @property
     def active_pos(self):
+        """Get active position."""
         return self[: self.active_n_dofs]
 
     @property
     def active_vel(self):
+        """Get active velocity."""
         return self[self.active_n_dofs : 2 * self.active_n_dofs]
 
     @property
     def active_acc(self):
+        """Get active acceleration."""
         return self[2 * self.active_n_dofs : 3 * self.active_n_dofs]
 
     @property
     def passive_kinematics(self):
+        """Get passive kinematics."""
         return self[
             3 * self.active_n_dofs : 3 * self.active_n_dofs + 3 * self.passive_n_dofs
         ]
 
     @property
     def passive_pos(self):
+        """Get passive position."""
         return self[
             3 * self.active_n_dofs : 3 * self.active_n_dofs + self.passive_n_dofs
         ]
 
     @property
     def passive_vel(self):
+        """Get passive velocity."""
         return self[
             3 * self.active_n_dofs
             + self.passive_n_dofs : 3 * self.active_n_dofs
@@ -95,6 +109,7 @@ class LR_State(State):
 
     @property
     def passive_acc(self):
+        """Get passive acceleration."""
         return self[
             3 * self.active_n_dofs
             + 2 * self.passive_n_dofs : 3 * self.active_n_dofs
@@ -111,15 +126,11 @@ if __name__ == "__main__":
     print(type(state.active_pos))
     print(type(state.passive_acc + 3))
     print(type(state.passive_pos + np.array([1, 2, 3, 4, 5, 6])))
-
-    '''
-    [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17]
-    [ 0 10 20 30 40 50]
-    <class '__main__.LR_State'>
-    <class '__main__.LR_State'>
-    <class '__main__.LR_State'>
-    '''
-
+    # [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17]
+    # [ 0 10 20 30 40 50]
+    # <class '__main__.LR_State'>
+    # <class '__main__.LR_State'>
+    # <class '__main__.LR_State'>
 
     # Subclassing Testing
     a = np.array([1, 2, 3])
@@ -127,13 +138,12 @@ if __name__ == "__main__":
     c = RealisticInfoArrayWithArrayFinalize(a, info="c")
     d = RealisticInfoArrayWithArrayFinalize(a, info="d")
 
-    # raises error because no array finalize
-    try:
-        print(a + b, (a + b).info, type(a + b), type(b[1:]))
-    except Exception as e:
-        print(e)
+    # raises error because no array_finalize:
+    # AttributeError: 'RealisticInfoArray' object has no attribute 'info'
+    # print((a + b).info)
 
-    # [2 4 6] c c <class '__main__.RealisticInfoArrayWithArrayFinalize'> <class '__main__.RealisticInfoArrayWithArrayFinalize'>
+    # [2 4 6] c c <class '__main__.RealisticInfoArrayWithArrayFinalize'>
+    # <class '__main__.RealisticInfoArrayWithArrayFinalize'>
     print(a + c, (a + c).info, (c + a).info, type(c[1:]), type(a + c))
 
     # prints c info

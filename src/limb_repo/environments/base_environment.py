@@ -1,12 +1,8 @@
+"""Abstract Base Environment."""
 import abc
 from dataclasses import dataclass
 
-from limb_repo.structs import State
-
-
-@dataclass
-class Config:
-    """The configuration of the environment."""
+from limb_repo.structs import LR_State
 
 
 @dataclass
@@ -21,9 +17,9 @@ class BaseEnvironment(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def get_state(self) -> State:
+    def get_state(self) -> LR_State:
         """Get the state of the environment agent."""
 
     @abc.abstractmethod
-    def update_state(self, state: State) -> None:
+    def update_state(self, state: LR_State) -> None:
         """Update the state of the environment agent."""
