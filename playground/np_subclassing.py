@@ -8,19 +8,23 @@ import numpy as np
 
 # from numpy docs
 class RealisticInfoArray(np.ndarray):
-    """From Numpy Docs with array_finalize removed"""
+    """From Numpy Docs with array_finalize removed."""
+
+    info = None
+
     def __new__(cls, input_array, info=None) -> "RealisticInfoArray":
         # Input array is an already formed ndarray instance
         # We first cast to be our class type
         obj = np.asarray(input_array).view(cls)
         # add the new attribute to the created instance
-        obj.info = info
+        obj.info = info  # type: ignore[attr-defined]
         # Finally, we must return the newly created object:
         return obj
 
 
 class RealisticInfoArrayWithArrayFinalize(np.ndarray):
-    """From Numpy Docs"""
+    """From Numpy Docs."""
+
     def __new__(cls, input_array, info=None) -> "RealisticInfoArrayWithArrayFinalize":
         # Input array is an already formed ndarray instance
         # We first cast to be our class type
@@ -144,7 +148,9 @@ if __name__ == "__main__":
 
     # [2 4 6] c c <class '__main__.RealisticInfoArrayWithArrayFinalize'>
     # <class '__main__.RealisticInfoArrayWithArrayFinalize'>
-    print(a + c, (a + c).info, (c + a).info, type(c[1:]), type(a + c))
+    print(
+        a + c, (a + c).info, (c + a).info, type(c[1:]), type(a + c)
+    )  # type: ignore[attr-defined]
 
     # prints c info
-    print((c + d).info)
+    print((c + d).info)  # type: ignore[attr-defined]

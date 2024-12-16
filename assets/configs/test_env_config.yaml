@@ -1,0 +1,8 @@
+active_pose: [0.8, -0.1, 0.5]
+active_config: [-0.54193711, -1.07197495, -2.81591873, -1.6951869,   2.48184051, -1.43600207]
+active_urdf: "assets/urdf/franka6/panda.urdf"
+passive_pose: [0.15, 0.1, 1.4]
+passive_config: [-0.32841343,  0.28639087, -1.99012555, -1.88232461,  1.32335729, -0.00612142]
+passive_urdf: "assets/urdf/human_arm/human_arm/arm_6dof_continuous.urdf"
+wheelchair_pose: [0.0, 0.0, 0.0]
+wheelchair_urdf: "assets/urdf/wheelchair/wheelchair.urdf"

@@ -1,4 +1,5 @@
 """PyBullet environment for Limb Repositioning."""
+
 from dataclasses import dataclass
 
 import numpy as np
@@ -11,7 +12,7 @@ from limb_repo.structs import Pose
 
 @dataclass
 class PyBulletConfig:
-    """The configuration of the PyBullet environment."""
+    """The configuration of a PyBullet environment."""
 
     active_pose: Pose
     active_config: np.ndarray
@@ -20,7 +21,7 @@ class PyBulletConfig:
     passive_config: np.ndarray
     passive_urdf: str
     wheelchair_pose: Pose
-    wheelchair_config: np.ndarray
+    # wheelchair_config: np.ndarray
     wheelchair_urdf: str
 
 
@@ -33,6 +34,12 @@ class PyBulletEnvironment(BaseEnvironment):
 
     def parse_config(self, path_to_yaml: str) -> omegaconf.DictConfig:
         """Parse the configuration file."""
-        yaml_conf = OmegaConf.load(path_to_yaml)
-        config = OmegaConf.structured(PyBulletConfig(**yaml_conf))
+        config = omegaconf.DictConfig(OmegaConf.load(path_to_yaml))
+
+        # to get around mypy "Keywords must be strings"
+        # and "value after ** should be a mapping"
+        config_dict = {str(key): value for key, value in dict(config).items()}
+
+        config = OmegaConf.structured(PyBulletConfig(**config_dict))
+
         return config

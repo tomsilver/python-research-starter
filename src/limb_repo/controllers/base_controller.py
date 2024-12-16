@@ -1,4 +1,5 @@
 """Abstract Base Controller."""
+
 import abc
 from dataclasses import dataclass
 
