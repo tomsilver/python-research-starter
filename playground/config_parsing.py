@@ -13,7 +13,7 @@ def parse_config(path_to_yaml: str) -> omegaconf.DictConfig:
     # to get around mypy "Keywords must be strings"
     # and "value after ** should be a mapping"
     config_dict = {str(key): value for key, value in dict(config).items()}
-    
+
     config = OmegaConf.structured(PyBulletConfig(**config_dict))
     return config
 

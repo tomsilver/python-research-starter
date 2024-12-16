@@ -146,11 +146,10 @@ if __name__ == "__main__":
     # AttributeError: 'RealisticInfoArray' object has no attribute 'info'
     # print((a + b).info)
 
-    # [2 4 6] c c <class '__main__.RealisticInfoArrayWithArrayFinalize'>
-    # <class '__main__.RealisticInfoArrayWithArrayFinalize'>
+    # c c <class '__main__.RealisticInfoArrayWithArrayFinalize'>
     print(
-        a + c, (a + c).info, (c + a).info, type(c[1:]), type(a + c)
-    )  # type: ignore[attr-defined]
+        (a + c).info, (c + a).info, type(a + c)  # type: ignore[attr-defined]
+    )
 
     # prints c info
     print((c + d).info)  # type: ignore[attr-defined]
