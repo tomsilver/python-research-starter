@@ -2,7 +2,7 @@
 
 import abc
 
-from limb_repo.environments.base_environment import BaseEnvironment
+from limb_repo.environments.base_env import BaseEnv
 from limb_repo.structs import Controller, State
 
 
@@ -11,10 +11,10 @@ class LimbRepositioningSystem:
 
     def __init__(
         self,
-        environment: BaseEnvironment,
+        environment: BaseEnv,
         controller: Controller,
     ) -> None:
-        self.environment: BaseEnvironment = environment
+        self.environment: BaseEnv = environment
         self.controller: Controller = controller
 
     @abc.abstractmethod

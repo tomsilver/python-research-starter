@@ -11,7 +11,7 @@ from omegaconf import DictConfig
 from limb_repo.approaches.base_approach import Approach
 from limb_repo.benchmarks.base_benchmark import Benchmark
 from limb_repo.structs import Task
-from limb_repo.utils import get_plan_cost, plan_is_valid
+from limb_repo.utils.utils import get_plan_cost, plan_is_valid
 
 
 @hydra.main(version_base=None, config_name="config", config_path="conf/")

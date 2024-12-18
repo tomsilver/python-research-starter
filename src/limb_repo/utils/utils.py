@@ -1,10 +1,10 @@
 """Utility functions."""
 
 from limb_repo.benchmarks.base_benchmark import Benchmark
-from limb_repo.structs import Action, Task
+from limb_repo.structs import JointAction, Task
 
 
-def plan_is_valid(plan: list[Action], task: Task, benchmark: Benchmark) -> bool:
+def plan_is_valid(plan: list[JointAction], task: Task, benchmark: Benchmark) -> bool:
     """Checks if the plan solves the task."""
     state = task.init
     for action in plan:
@@ -12,7 +12,7 @@ def plan_is_valid(plan: list[Action], task: Task, benchmark: Benchmark) -> bool:
     return benchmark.check_goal(state, task.goal)
 
 
-def get_plan_cost(plan: list[Action], task: Task, benchmark: Benchmark) -> float:
+def get_plan_cost(plan: list[JointAction], task: Task, benchmark: Benchmark) -> float:
     """Get the total plan cost."""
     cost = 0.0
     state = task.init

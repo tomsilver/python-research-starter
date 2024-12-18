@@ -1,8 +1,22 @@
-active_pose: [0.8, -0.1, 0.5]
-active_config: [-0.54193711, -1.07197495, -2.81591873, -1.6951869,   2.48184051, -1.43600207]
+### Simulation Params
+pybullet_config:
+  use_gui: True
+  real_time_simulation: False
+  gravity: [0.0, 0.0, 0.0] # [0.0, 0.0, -9.81]
+  dt: 0.005
+
+### Limb Repo Params
+active_pose: [0.8, -0.1, 0.5, 0, 0, 3.1415926535897932384626433] # x y z, euler x y z
+active_config: [-0.32841343,  0.28639087, -1.99012555, -1.88232461,  1.32335729, -0.00612142]
 active_urdf: "assets/urdf/franka6/panda.urdf"
-passive_pose: [0.15, 0.1, 1.4]
-passive_config: [-0.32841343,  0.28639087, -1.99012555, -1.88232461,  1.32335729, -0.00612142]
-passive_urdf: "assets/urdf/human_arm/human_arm/arm_6dof_continuous.urdf"
-wheelchair_pose: [0.0, 0.0, 0.0]
+
+passive_pose: [0.15, 0.1, 1.4, 3.1415926535897932384626433, 0, 0] # x y z, euler x y z
+passive_config: [-2.89089697, -0.9754231 , -2.08760543, -1.08786023,  0.14448669, -0.26559232]
+passive_urdf: "assets/urdf/human_arm/arm_6dof_continuous.urdf"
+# passive_urdf: "assets/urdf/human_arm/arm.urdf"
+
+wheelchair_pose: [0.0, 0.0, 0.0, 0, 0, 0] # x y z, euler x y z
 wheelchair_urdf: "assets/urdf/wheelchair/wheelchair.urdf"
+
+# rotates robot ee wrt human ee: h_ee = R * r_ee
+robot_ee_to_human_ee: [[0, 0, -1], [0, -1, 0], [-1, 0, 0]]

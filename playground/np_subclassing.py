@@ -147,9 +147,7 @@ if __name__ == "__main__":
     # print((a + b).info)
 
     # c c <class '__main__.RealisticInfoArrayWithArrayFinalize'>
-    print(
-        (a + c).info, (c + a).info, type(a + c)  # type: ignore[attr-defined]
-    )
+    print((a + c).info, (c + a).info, type(a + c))  # type: ignore[attr-defined]
 
     # prints c info
     print((c + d).info)  # type: ignore[attr-defined]
