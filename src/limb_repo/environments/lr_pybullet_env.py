@@ -1,7 +1,6 @@
 """PyBullet environment for Limb Repositioning."""
 
 from dataclasses import dataclass
-from typing import Union
 
 import numpy as np
 import omegaconf
@@ -86,6 +85,9 @@ class LRPyBulletEnv(PyBulletEnv):
             ]
         )
 
+        # set constraint id to none because it hasn't been created yet
+        self.cid = None
+
         ## Load bodies into pybullet sim
         self.active_id = self.p.loadURDF(
             self.active_urdf,
@@ -105,8 +107,6 @@ class LRPyBulletEnv(PyBulletEnv):
 
         # Configure settings for sim bodies
         self.configure_body_settings()
-
-        return
 
     def step(self) -> None:
         """Step the environment."""
@@ -128,14 +128,9 @@ class LRPyBulletEnv(PyBulletEnv):
 
     def set_body_state(self, body_id: int, state: BodyState) -> None:
         """Set the states of active or passive."""
-        for i, joint_id in enumerate(
-            pybullet_utils.get_good_joints(self.p, body_id)
-        ):
+        for i, joint_id in enumerate(pybullet_utils.get_good_joints(self.p, body_id)):
             self.p.resetJointState(
-                body_id,
-                joint_id,
-                (state.pos)[i],
-                targetVelocity=state.vel[i],
+                body_id, joint_id, (state.pos)[i], targetVelocity=state.vel[i]
             )
 
     def set_lr_state(self, state: LRState) -> None:
@@ -159,6 +154,7 @@ class LRPyBulletEnv(PyBulletEnv):
         )
 
     def configure_body_settings(self) -> None:
+        """Configure settings for sim bodies."""
         # remove friction terms as well contact stiffness and damping
         for i in range(self.p.getNumJoints(self.passive_id)):
             self.p.changeDynamics(
@@ -189,7 +185,7 @@ class LRPyBulletEnv(PyBulletEnv):
                 rollingFriction=0.0,
                 contactStiffness=0.0,
                 contactDamping=0.0,
-            ),  # , jointLowerLimit=-6.283185 * 200, jointUpperLimit=6.283185 * 200)
+            )  # , jointLowerLimit=-6.283185 * 200, jointUpperLimit=6.283185 * 200)
 
         # remove collision for both robot and human arms
         group = 0

@@ -51,6 +51,7 @@ strict_equality = true
 disallow_untyped_calls = true
 warn_unreachable = true
 exclude = ["venv/*"]
+disable_error_code = ["import-untyped", "import-not-found"]
 
 [[tool.mypy.overrides]]
 module = [

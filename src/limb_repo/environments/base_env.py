@@ -2,8 +2,6 @@
 
 import abc
 
-from limb_repo.structs import JointAction, LRState
-
 
 class BaseEnv(abc.ABC):
     """An environment for the agent to interact with."""
@@ -23,7 +21,7 @@ class BaseEnv(abc.ABC):
     #     """
 
     # @abc.abstractmethod
-    # def send_action(self, action: JointAction) -> None:
+    # def send_action(self, action: Action) -> None:
     #     """Send an action to the active arm.
 
     #     *Does not step*.
