@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
    "matplotlib",
-   "numpy",
+   "numpy<2.0",
    "pandas",
    "pandas-stubs",
    "hydra-core",
