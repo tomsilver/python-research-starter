@@ -16,6 +16,8 @@ dependencies = [
    "hydra-core",
    "omegaconf",
    "tomsutils@git+https://github.com/tomsilver/toms-utils.git",
+   "pybullet",
+   "scipy",
 ]
 
 [project.optional-dependencies]
